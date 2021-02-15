@@ -4,9 +4,14 @@ import java.util.Random;
 
 public class GenerateUUIDService {
 
-    public String getData() {
+    private MyRandom random;
+
+    public void setRandom(MyRandom random) {
+        this.random = random;
+    }
+
+    public String getData(MyRandom random) {
         String result = "SOMKIAT";
-        Random random = new Random();
         int number = random.nextInt(9);
         return result + number;
     }
