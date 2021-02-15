@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 public class GenerateUUIDService {
 
     @Autowired
-    private MyRandom random;
+    private MyRandom somkiatRandom;
 
     public String getData() {
         String result = "SOMKIAT";
-        int number = random.nextInt(9);
+        int number = somkiatRandom.nextInt(9);
         return result + number;
     }
 
