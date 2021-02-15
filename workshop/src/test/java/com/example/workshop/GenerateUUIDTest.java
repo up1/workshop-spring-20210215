@@ -26,7 +26,7 @@ public class GenerateUUIDTest {
         GenerateUUIDService service
                 = new GenerateUUIDService();
         // 3. Setter Injection
-        service.setRandom(random);
+//        service.setRandom(random);
         // Act
         // 2. Method Injection
         String result = service.getData(random);
