@@ -18,7 +18,7 @@ public class HelloControllerTest {
     public void success_with_hello() {
         HelloResponse result
                 = restTemplate.getForObject("/hello", HelloResponse.class);
-        assertEquals("Hello World 2", result.getMessage());
+        assertEquals("Hello World", result.getMessage());
     }
 
 }
