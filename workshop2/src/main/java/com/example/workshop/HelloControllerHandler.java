@@ -11,7 +11,7 @@ public class HelloControllerHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<HelloResponse> notFound( RuntimeException e ) {
         HelloResponse response = new HelloResponse(e.getMessage());
-        return new ResponseEntity<HelloResponse>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
