@@ -29,9 +29,22 @@ public class UsersController {
     }
 
     @GetMapping("/users/{id}")
-    public UserResponse getUserById(@PathVariable int id) {
-        UserResponse userResponse = new UserResponse(id, "Demo", 40);
+    public UserResponse getUserById(
+            @PathVariable String id) {
+        int _id = validateInput(id);
+        // Process
+        UserResponse userResponse = new UserResponse(_id, "Demo", 40);
         return userResponse;
+    }
+
+    private int validateInput(String id) {
+        int _id;
+        try {
+            _id = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Input invalid");
+        }
+        return _id;
     }
 
 }
