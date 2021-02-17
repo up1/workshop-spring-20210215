@@ -36,4 +36,16 @@ public class HelloController3Test {
         assertEquals("Hello World", result.getMessage());
     }
 
+    @Test
+    public void not_found_with_hello3() {
+        // Stubbing
+        given(helloRepository.findById(1))
+                .willReturn(Optional.empty());
+
+        // Testing
+        HelloResponse result
+                = restTemplate.getForObject("/hello", HelloResponse.class);
+        assertEquals("Data not found with id=1", result.getMessage());
+    }
+
 }
