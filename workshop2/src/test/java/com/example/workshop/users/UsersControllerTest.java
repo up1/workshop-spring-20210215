@@ -1,5 +1,6 @@
 package com.example.workshop.users;
 
+import com.example.workshop.HelloResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,5 +41,14 @@ public class UsersControllerTest extends Object {
         // Assert / validate
         UserResponse expected = new UserResponse(1, "Demo", 40);
         assertEquals(expected, response);
+    }
+
+    @Test
+    public void invalid_id_with_get_user_by_id() {
+        // Call API
+        HelloResponse response
+                = restTemplate.getForObject("/users/invalid", HelloResponse.class);
+        // Assert / validate
+        assertEquals("Input invalid", response.getMessage());
     }
 }
