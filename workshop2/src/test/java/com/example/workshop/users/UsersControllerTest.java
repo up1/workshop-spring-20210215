@@ -5,13 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.context.SpringBootTest.*;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class UsersControllerTest {
+public class UsersControllerTest extends Object {
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -19,12 +21,24 @@ public class UsersControllerTest {
     @Test
     public void success_getAllUsers() {
         // Call API
-        List<UserResponse> response
+        List<LinkedHashMap> response
                 = restTemplate.getForObject("/users", List.class);
         // Assert / validate
         assertEquals(2, response.size());
+        UserResponse expected = new UserResponse(1, "demo 1", 30);
+        UserResponse result = new UserResponse(Integer.valueOf(response.get(0).get("id").toString()),
+                response.get(0).get("name").toString(),
+                Integer.valueOf(response.get(0).get("age").toString()));
+        assertEquals(expected, result);
+    }
 
-        UserResponse expected = new UserResponse(1,"demo 1", 30);
-        assertEquals(expected, response.get(0));
+    @Test
+    public void success_get_user_by_id() {
+        // Call API
+        UserResponse response
+                = restTemplate.getForObject("/users/1", UserResponse.class);
+        // Assert / validate
+        UserResponse expected = new UserResponse(1, "Demo", 40);
+        assertEquals(expected, response);
     }
 }
